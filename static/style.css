@@ -1,0 +1,89 @@
+body {
+  font-family: monospace;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+input[type="text"] {
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  background-color: #252526;
+  border: none;
+  color: #d4d4d4;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+button[type="submit"] {
+  background-color: #4ec9b0;
+  color: #1e1e1e;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3ba08c;
+}
+
+::-webkit-input-placeholder {
+  color: #8c8c8c;
+  font-size: 1.25rem;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #8c8c8c;
+  font-size: 1.25rem;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #8c8c8c;
+  font-size: 1.25rem;
+}
+
+:-ms-input-placeholder {
+  color: #8c8c8c;
+  font-size: 1.25rem;
+}
+
+.response {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.error {
+  background-color: #f44336;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  color: #000;
+}
+
+.countdown {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  color: #d4d4d4;
+  text-align: center;
+}

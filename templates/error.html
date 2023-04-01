@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CPCCOMMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>CPCCOMMS</h1>
+    <div class="error">
+        <p>{{ message }}</p>
+        <p>Next message can be sent in: <span id="countdown"></span></p>
+    </div>
+
+   <script>
+    let countdown = "{{ countdown }}";
+    let countdownElem = document.getElementById("countdown");
+    countdownElem.innerText = countdown;
+
+    let countDownInterval = setInterval(() => {
+        let timeArr = countdown.split(":");
+        let hours = parseInt(timeArr[0]);
+        let minutes = parseInt(timeArr[1]);
+        let seconds = parseInt(timeArr[2]);
+        let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+        if (totalSeconds === 0) {
+            clearInterval(countDownInterval);
+            history.back();
+        } else {
+            totalSeconds--;
+            let newHours = Math.floor(totalSeconds / 3600);
+            let newMinutes = Math.floor((totalSeconds - (newHours * 3600)) / 60);
+            let newSeconds = totalSeconds % 60;
+            countdown = `${newHours.toString().padStart(2, "0")}:${newMinutes.toString().padStart(2, "0")}:${newSeconds.toString().padStart(2, "0")}`;
+            countdownElem.innerText = countdown;
+        }
+    }, 1000);
+</script>
+</body>
+</html>
