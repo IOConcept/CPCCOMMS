@@ -1,18 +1,22 @@
 from flask import Blueprint, request, jsonify, render_template
 from datetime import datetime, time, timedelta
 from utils import load_messages, clear_messages, get_countdown
+import requests
+import json
 
 message_bp = Blueprint('message', __name__, url_prefix='/message')
 submit_bp = Blueprint('submit', __name__, url_prefix='/submit')
 index_bp = Blueprint('index', __name__)
+
+messages = load_messages()  # Initialize the messages list
 
 # Handle incoming messages
 @message_bp.route('', methods=['POST'])
 def handle_message():
     # Check time of day
     now = datetime.now().time()
-    if now < time(8, 0) or now > time(15, 0):
-        return jsonify({'error': 'Messages can only be sent between 8:00 AM and 3:00 PM', 'countdown': get_countdown()}), 400
+    if now < time(8, 0) or now > time(20, 0):
+        return jsonify({'error': 'Messages can only be sent between 8:00 AM and 8:00 PM', 'countdown': get_countdown()}), 400
 
     data = request.get_json()
     if data is None:
@@ -40,7 +44,7 @@ def handle_message():
 # Render form page
 @index_bp.route('/', methods=['GET'])
 def index():
-    theme = 'light' if time(8, 0) <= datetime.now().time() <= time(15, 0) else 'dark'
+    theme = 'light' if time(8, 0) <= datetime.now().time() <= time(20, 0) else 'dark'
     return render_template('form.html', theme=theme)
 
 # Handle form submission
@@ -48,8 +52,8 @@ def index():
 def submit():
     # Check time of day
     now = datetime.now().time()
-    if now < time(8, 0) or now > time(15, 0):
-        return render_template('error.html', message='Messages can only be sent between 8:00 AM and 3:00 PM',
+    if now < time(8, 0) or now > time(20, 0):
+        return render_template('error.html', message='Messages can only be sent between 8:00 AM and 8:00 PM',
                                countdown=get_countdown())
 
     message = request.form['message']
@@ -59,5 +63,3 @@ def submit():
 
     # Return response
     return render_template('response.html', message=message, response=response.json()['message'], messages=messages)
-
-
