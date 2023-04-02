@@ -88,9 +88,7 @@
 <body>
     <h1>CPCCOMMS</h1>
     <form method="POST" action="/submit">
-        <label for="message">Message:</label>
-        <input type="text" id="message" name="message" placeholder="Type your message here" required>
-        <button type="submit">Send</button>
+        <!-- ... (form elements) -->
     </form>
     {% if response %}
     <div class="response">
@@ -103,5 +101,11 @@
         <p>Countdown until messages can be sent: {{ countdown }}</p>
     </div>
     {% endif %}
+    <h2>Messages:</h2>
+    <ul>
+      {% for msg in messages %}
+      <li>{{ msg.time }} - {{ msg.message }}</li>
+      {% endfor %}
+    </ul>
 </body>
 </html>
